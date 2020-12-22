@@ -16,6 +16,19 @@ class FilesService {
             });
         });
     }
+
+    downloadFile(fileName) {
+        return new Promise((res, reject) => {
+
+            fs.readFile(`upload/${fileName}`,//lê o arquivo da pasta upload
+                {encoding: 'base64'}, //codifica o retorno para base64
+                function(err, data) { //funcao de retorno do arquivo ja codificado
+                    if(!err) return res(data);
+                    reject(err);
+                });
+        });
+
+    }
 }
 
 module.exports = new FilesService();
